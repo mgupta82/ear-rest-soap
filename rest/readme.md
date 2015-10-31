@@ -50,3 +50,6 @@ CREATE TABLE `entdb`.`customer` (
   `credit_rating` INT NULL,
   `nab_customer` VARCHAR(45) NULL,
   PRIMARY KEY (`customer_id`));
+
+ALTER TABLE `entdb`.`customer` 
+CHANGE COLUMN `customer_id` `customer_id` INT(11) NOT NULL AUTO_INCREMENT ;
