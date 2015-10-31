@@ -24,3 +24,29 @@ Write a maven java project using Spring MVC and simple JDBC or myBatis persisten
 ##Implicit Requirements:
 *	Ensure to test the application for quality
 *	Code coverage to be minimum of 80%
+
+#Solution
+
+##Maven Project
+mvn archetype:generate -DgroupId=com.test -DartifactId=rest -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+##MySQL DB
+CREATE TABLE `entdb`.`customer` (
+  `customer_id` INT NOT NULL,
+  `first_name` VARCHAR(45) NULL,
+  `middle_name` VARCHAR(45) NULL,
+  `sur_name` VARCHAR(45) NULL,
+  `initials` VARCHAR(5) NULL,
+  `title` VARCHAR(5) NULL,
+  `street_number` INT NULL,
+  `street_name` VARCHAR(45) NULL,
+  `suburb` VARCHAR(45) NULL,
+  `city` VARCHAR(45) NULL,
+  `state` VARCHAR(45) NULL,
+  `country` VARCHAR(45) NULL,
+  `pincode` INT NULL,
+  `sex` VARCHAR(1) NULL,
+  `marital_status` VARCHAR(10) NULL,
+  `credit_rating` INT NULL,
+  `nab_customer` VARCHAR(45) NULL,
+  PRIMARY KEY (`customer_id`));
