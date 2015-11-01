@@ -1,5 +1,6 @@
 package com.test.rest.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,47 +15,42 @@ import com.test.rest.model.Customer;
 import com.test.rest.model.FullName;
 import com.test.rest.model.MaritalStatus;
 import com.test.rest.model.Sex;
+import com.test.rest.service.CustomerService;
 
 @Controller
 public class CustomerController {
 	
+	@Autowired
+	CustomerService customerService;
+	
 	@RequestMapping(value="/customer/{customerId}", method=RequestMethod.GET)
-	public @ResponseBody Customer getEmployee(@PathVariable("customerId") Integer customerId){
-		Address address = new Address();
-		address.setStreetNumber(708);
-		address.setStreetName("19 Hanover Street");
-		address.setSuburb("oakleigh");
-		address.setCity("Melbourne");
-		address.setState("Victoria");
-		address.setPincode(3166);
-		address.setCountry("Australia");
-		FullName fullName = new FullName();
-		fullName.setFirstName("Mukesh");
-		fullName.setMiddleName("Shital");
-		fullName.setSurName("Gupta");
-		Customer customer = new Customer();
-		customer.setCustomerId(customerId);
-		customer.setFullName(fullName);
-		customer.setResidenceAddress(address);
-		customer.setInitials("S");
-		customer.setTitle("Mr.");
-		customer.setSex(Sex.MALE);
-		customer.setMaritalStatus(MaritalStatus.NEVER_MARRIED);
-		customer.setCreditRating(80);
-		customer.setNabCustomer(true);
-		return customer;
+	public ResponseEntity<Customer> getEmployee(@PathVariable("customerId") Integer customerId){
+		Customer customer = customerService.getCustomer(customerId);
+		if(customer == null)
+			return new ResponseEntity<>(customer,HttpStatus.NOT_FOUND);;
+		return new ResponseEntity<>(customer,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/customer", method=RequestMethod.POST, consumes="application/json")
 	public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer){
-		customer.setCustomerId(123);
-		return new ResponseEntity<>(customer,HttpStatus.CREATED);
+		if(customerService.createCustomer(customer))
+			return new ResponseEntity<>(customer,HttpStatus.CREATED);
+		return new ResponseEntity<>(customer,HttpStatus.BAD_REQUEST);
 	}
 
 	@RequestMapping(value="/customer/{customerId}", method=RequestMethod.PUT, consumes="application/json")
 	public ResponseEntity<String> updateCustomer(@PathVariable("customerId") Integer customerId,@RequestBody Customer customer){
-		return new ResponseEntity<>("Customer Updated",HttpStatus.OK);
+		customer.setCustomerId(customerId);
+		if(customerService.updateCustomer(customer))
+			return new ResponseEntity<>("Customer Updated",HttpStatus.OK);
+		return new ResponseEntity<>("Failed to update cutomer",HttpStatus.BAD_REQUEST);
 	}
 
+	@RequestMapping(value="/customer/{customerId}", method=RequestMethod.DELETE)
+	public ResponseEntity<String> removeCustomer(@PathVariable("customerId") Integer customerId){
+		if(customerService.removeCustomer(customerId))
+			return new ResponseEntity<>("Customer Deleted",HttpStatus.OK);
+		return new ResponseEntity<>("Failed to delete cutomer",HttpStatus.BAD_REQUEST);
+	}	
 	
 }

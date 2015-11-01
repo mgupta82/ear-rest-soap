@@ -6,10 +6,10 @@ public interface CustomerDao {
 	
 	public Customer getCustomer(Integer customerId);
 	
-	public Customer insertCustomer(Customer customer);
+	public int insertCustomer(Customer customer);
 	
-	public boolean saveCustomer(Customer customer);
+	public int saveCustomer(Customer customer);
 	
-	public boolean removeCustomer(Integer customerId);
+	public int removeCustomer(Integer customerId);
 
 }

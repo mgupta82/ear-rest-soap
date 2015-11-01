@@ -1,5 +1,17 @@
 package com.test.rest.model;
 
 public enum Sex {
-	MALE,FEMALE
+	MALE("MALE"),
+	FEMALE("FEMALE");
+	
+	private String  gender;
+	
+	Sex(String gender) {
+		this.gender = gender;
+	}
+	
+	public String  toString(){
+		return this.gender;
+	}
+	
 }
