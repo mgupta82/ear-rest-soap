@@ -1,11 +1,13 @@
-package com.test.rest.dao;
+package com.test.rest.service;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import com.test.rest.model.Address;
 import com.test.rest.model.Customer;
@@ -13,16 +15,12 @@ import com.test.rest.model.FullName;
 import com.test.rest.model.MaritalStatus;
 import com.test.rest.model.Sex;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:spring-servlet.xml")
-public class TestCustomerDao {
-	
+public class TestCustomerService {
+
 	@Autowired
-	CustomerDao customerDao;
+	CustomerService customerService;
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -53,29 +51,27 @@ public class TestCustomerDao {
 		address.setCountry("test");
 		customer.setResidenceAddress(address);
 		customer.setSex(Sex.valueOf("MALE"));
-		customer.setTitle("Mr");		
-		int rowsInserted = customerDao.insertCustomer(customer);
-		assertEquals(rowsInserted, 1);
+		customer.setTitle("Mr");
+		assert(customerService.createCustomer(customer));
 	}	
 
 	@Test
 	public void testGetCustomer(){
-		Customer customer = customerDao.getCustomer(getMaxCustomerId());
+		Customer customer = customerService.getCustomer(getMaxCustomerId());
 		assertEquals(customer.getFullName().getSurName(), "test");
 	}
 	
 	@Test
 	public void testUpdateCustomer(){
-		Customer customer = customerDao.getCustomer(getMaxCustomerId());
+		Customer customer = customerService.getCustomer(getMaxCustomerId());
 		customer.getFullName().setFirstName("test1");
-		int rowsUpdated = customerDao.saveCustomer(customer);
-		assertEquals(rowsUpdated, 1);
+		assert(customerService.updateCustomer(customer));
 	}	
 	
 	@Test
 	public void testDeleteCustomer(){
-		int rowsDeleted = customerDao.removeCustomer(getMaxCustomerId());
-		assertEquals(rowsDeleted, 1);
+		assert(customerService.removeCustomer(getMaxCustomerId()));
 	}		
+	
 	
 }
