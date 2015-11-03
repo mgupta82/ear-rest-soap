@@ -24,7 +24,7 @@ public class CustomerController {
 	CustomerService customerService;
 	
 	@RequestMapping(value="/customer/{customerId}", method=RequestMethod.GET)
-	public ResponseEntity<Customer> getEmployee(@PathVariable("customerId") Integer customerId){
+	public ResponseEntity<Customer> getCustomer(@PathVariable("customerId") Integer customerId){
 		Customer customer = customerService.getCustomer(customerId);
 		if(customer == null)
 			return new ResponseEntity<>(customer,HttpStatus.NOT_FOUND);;
