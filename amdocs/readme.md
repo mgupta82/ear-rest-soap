@@ -25,14 +25,13 @@ Input for the car can be from a file or standard input.
 1. INIT 0,0,NORTH
 2. FORWARD
 3. GPS_REPORT
-
-Output: 0,1,NORTH
+* Output: 0,1,NORTH
 
 ###
 1. INIT 0,0,NORTH
 2. TURN_LEFT
 3. GPS_REPORT
-Output: 0,0,WEST
+* Output: 0,0,WEST
 
 ###
 1. INIT 1,2,EAST
@@ -41,7 +40,7 @@ Output: 0,0,WEST
 4. TURN_LEFT
 5. FORWARD
 6. GPS_REPORT
-Output: 3,3,NORTH
+* Output: 3,3,NORTH
 
 ##Deliverables:
 * All Java source code and any test code.
