@@ -22,16 +22,16 @@ Input for the car can be from a file or standard input.
 ##Example:
 
 ###
-INIT 0,0,NORTH
-FORWARD
-GPS_REPORT
+1. INIT 0,0,NORTH
+2. FORWARD
+3. GPS_REPORT
 
 Output: 0,1,NORTH
 
 ###
-INIT 0,0,NORTH
-TURN_LEFT
-GPS_REPORT
+1. INIT 0,0,NORTH
+2. TURN_LEFT
+3. GPS_REPORT
 
 Output: 0,0,WEST
 
