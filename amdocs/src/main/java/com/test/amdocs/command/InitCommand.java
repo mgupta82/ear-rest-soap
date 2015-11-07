@@ -16,8 +16,8 @@ public class InitCommand implements Command{
 	@Override
 	public void execute() {
 		if(car!=null 
-				&& position.getXpos() < car.getGrid().getBreadth()-1 
-				&& position.getYpos()<car.getGrid().getLength()-1){		
+				&& position.getXpos() <= car.getGrid().getBreadth()-1 
+				&& position.getYpos()<= car.getGrid().getLength()-1){		
 			car.setPosition(position);
 		}
 	}

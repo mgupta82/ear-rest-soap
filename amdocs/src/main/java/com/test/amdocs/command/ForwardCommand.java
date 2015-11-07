@@ -12,9 +12,7 @@ public class ForwardCommand implements Command {
 
 	@Override
 	public void execute() {
-		if(car.getPosition() != null)
-			car.moveForward();
-		
+		car.moveForward();
 	}
 
 }

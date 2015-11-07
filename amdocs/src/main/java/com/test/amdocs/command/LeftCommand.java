@@ -12,9 +12,7 @@ public class LeftCommand implements Command {
 
 	@Override
 	public void execute() {
-		if(car.getPosition() != null)
 			car.turnLeft();
-		
 	}
 
 }

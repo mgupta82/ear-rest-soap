@@ -42,6 +42,13 @@ public class CarTest {
 		CommandExecutor commandExecutor = new CommandExecutor();
 		commandExecutor.executeCommand("testreplacement.txt");
 		assertEquals("3,2,NORTH",commandExecutor.getCar().getPosition().toString());
-	}		
+	}	
+	
+	@Test
+	public void testOutOfGrid() throws Exception{
+		CommandExecutor commandExecutor = new CommandExecutor();
+		commandExecutor.executeCommand("testoutofgrid.txt");
+		assertEquals("3,4,NORTH",commandExecutor.getCar().getPosition().toString());
+	}	
 	
 }

@@ -12,7 +12,6 @@ public class RightCommand implements Command {
 
 	@Override
 	public void execute() {
-		if(car.getPosition() != null)
 			car.turnRight();
 	}
 
