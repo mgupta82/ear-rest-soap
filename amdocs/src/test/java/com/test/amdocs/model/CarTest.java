@@ -7,6 +7,7 @@ import org.junit.Test;
 import com.test.amdocs.model.Direction;
 import com.test.amdocs.model.Grid;
 import com.test.amdocs.model.Position;
+import com.test.amdocs.command.CommandExecutor;
 import com.test.amdocs.model.Car;
 
 public class CarTest {
@@ -21,4 +22,26 @@ public class CarTest {
 		car.moveForward();
 		assertEquals("3,3,NORTH", car.getPosition().toString());
 	}
+	
+	@Test
+	public void testInvalidPalcement() throws Exception{
+		CommandExecutor commandExecutor = new CommandExecutor();
+		commandExecutor.executeCommand("testinvalidplacement.txt");
+		assertEquals(null,commandExecutor.getCar().getPosition());
+	}
+	
+	@Test
+	public void testNoPalcement() throws Exception{
+		CommandExecutor commandExecutor = new CommandExecutor();
+		commandExecutor.executeCommand("testnoplacement.txt");
+		assertEquals(null,commandExecutor.getCar().getPosition());
+	}	
+	
+	@Test
+	public void testRePalcement() throws Exception{
+		CommandExecutor commandExecutor = new CommandExecutor();
+		commandExecutor.executeCommand("testreplacement.txt");
+		assertEquals("3,2,NORTH",commandExecutor.getCar().getPosition().toString());
+	}		
+	
 }
